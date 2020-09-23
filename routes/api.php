@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Users\LogOutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 Route::prefix('v1')->group(function(){
     Route::prefix('auth')->name('auth.')->group(function(){
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
         Route::post('/login', [LoginController::class, 'login'])->name('login');
+    });
+
+    Route::middleware('auth:sanctum')->group(static function () {
+        Route::prefix('users')->name('user.')->group(static function(){
+            Route::post('logOut', [LogOutController::class, 'logOut'])->name('logOut');
+        });
     });
 });
