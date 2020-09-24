@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Bookstore\CreateBookController;
 use App\Http\Controllers\Users\LogOutController;
 use App\Http\Controllers\Users\ProfileController;
 use Illuminate\Http\Request;
@@ -29,6 +30,10 @@ Route::prefix('v1')->group(function(){
         Route::prefix('users')->name('user.')->group(static function(){
             Route::get('/profile', [ProfileController::class, 'show'])->name('show');
             Route::post('logOut', [LogOutController::class, 'logOut'])->name('logOut');
+        });
+
+        Route::prefix('books')->name('book.')->group(static function(){
+            Route::post('/', [CreateBookController::class, 'store'])->name('store');
         });
     });
 });
