@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Bookstore\AllBooksController;
 use App\Http\Controllers\Bookstore\CreateBookController;
+use App\Http\Controllers\Bookstore\GetBookController;
 use App\Http\Controllers\Users\LogOutController;
 use App\Http\Controllers\Users\ProfileController;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ Route::prefix('v1')->group(function(){
 
     Route::prefix('books')->name('book.')->group(static function(){
         Route::get('/', [AllBooksController::class, 'index'])->name('index');
+        Route::get('/{book}', [GetBookController::class, 'show'])->name('show');
     });
 
     Route::middleware('auth:sanctum')->group(static function () {
