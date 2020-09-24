@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Bookstore\AllBooksController;
 use App\Http\Controllers\Bookstore\CreateBookController;
 use App\Http\Controllers\Users\LogOutController;
 use App\Http\Controllers\Users\ProfileController;
@@ -24,6 +25,10 @@ Route::prefix('v1')->group(function(){
     Route::prefix('auth')->name('auth.')->group(function(){
         Route::post('/register', [RegisterController::class, 'register'])->name('register');
         Route::post('/login', [LoginController::class, 'login'])->name('login');
+    });
+
+    Route::prefix('books')->name('book.')->group(static function(){
+        Route::get('/', [AllBooksController::class, 'index'])->name('index');
     });
 
     Route::middleware('auth:sanctum')->group(static function () {
