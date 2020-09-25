@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Bookstore\AllBooksController;
 use App\Http\Controllers\Bookstore\CreateBookController;
 use App\Http\Controllers\Bookstore\GetBookController;
+use App\Http\Controllers\Bookstore\UpdateBookController;
 use App\Http\Controllers\Users\LogOutController;
 use App\Http\Controllers\Users\ProfileController;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ Route::prefix('v1')->group(function(){
 
         Route::prefix('books')->name('book.')->group(static function(){
             Route::post('/', [CreateBookController::class, 'store'])->name('store');
+            Route::patch('/{book}', [UpdateBookController::class, 'update'])->name('update');
         });
     });
 });
