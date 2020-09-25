@@ -7,6 +7,7 @@ use App\Http\Controllers\Bookstore\CreateBookController;
 use App\Http\Controllers\Bookstore\DeleteBookController;
 use App\Http\Controllers\Bookstore\GetBookController;
 use App\Http\Controllers\Bookstore\UpdateBookController;
+use App\Http\Controllers\Ratings\RatingController;
 use App\Http\Controllers\Users\LogOutController;
 use App\Http\Controllers\Users\ProfileController;
 use Illuminate\Http\Request;
@@ -45,6 +46,10 @@ Route::prefix('v1')->group(function(){
             Route::post('/', [CreateBookController::class, 'store'])->name('store');
             Route::patch('/{book}', [UpdateBookController::class, 'update'])->name('update');
             Route::delete('/{book}', [DeleteBookController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::name('rating.')->group(static function(){
+            Route::post('/book/{book}/rating', [RatingController::class, 'store'])->name('store');
         });
     });
 });
